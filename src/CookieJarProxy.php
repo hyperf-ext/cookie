@@ -1,0 +1,81 @@
+<?php
+
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
+namespace HyperfExt\Cookie;
+
+use Hyperf\Contract\ConfigInterface;
+use Hyperf\HttpMessage\Cookie\Cookie;
+use Hyperf\Utils\Context;
+use HyperfExt\Cookie\Contract\CookieJarInterface;
+
+class CookieJarProxy extends CookieJar
+{
+    /**
+     * @var \Hyperf\Contract\ConfigInterface
+     */
+    protected $config;
+
+    public function __construct(ConfigInterface $config)
+    {
+        $this->config = $config;
+    }
+
+    public function hasQueued(string $key, ?string $path = null): bool
+    {
+        return $this->getCookieJar()->hasQueued($key, $path);
+    }
+
+    public function queued(string $key, $default = null, ?string $path = null): ?Cookie
+    {
+        return $this->getCookieJar()->queued($key, $default, $path);
+    }
+
+    public function queue(Cookie $cookie): void
+    {
+        $this->getCookieJar()->queue($cookie);
+    }
+
+    public function unqueue(string $name, ?string $path = null): void
+    {
+        $this->getCookieJar()->unqueue($name, $path);
+    }
+
+    public function setDefaultPathAndDomain(string $path, string $domain, bool $secure = false, ?string $sameSite = null)
+    {
+        return $this->getCookieJar()->setDefaultPathAndDomain($path, $domain, $secure, $sameSite);
+    }
+
+    public function getQueuedCookies(): array
+    {
+        return $this->getCookieJar()->getQueuedCookies();
+    }
+
+    protected function getPathAndDomain(?string $path = null, ?string $domain = null, ?bool $secure = null, ?string $sameSite = null)
+    {
+        return $this->getCookieJar()->getPathAndDomain($path, $domain, $secure, $sameSite);
+    }
+
+    protected function getCookieJar(): CookieJarInterface
+    {
+        if (! Context::has(CookieJarInterface::class)) {
+            $cookieJar = new CookieJar();
+            $config = $this->config->get('ext-cookie', []);
+            $cookieJar->setDefaultPathAndDomain(
+                $config['path'] ?? '/',
+                $config['domain'] ?? '',
+                false,
+                $config['same_site'] ?? 'lax'
+            );
+            Context::set(CookieJarInterface::class, $cookieJar);
+        }
+        return Context::get(CookieJarInterface::class);
+    }
+}

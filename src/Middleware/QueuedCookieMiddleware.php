@@ -1,0 +1,54 @@
+<?php
+
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
+namespace HyperfExt\Cookie\Middleware;
+
+use Hyperf\Contract\ConfigInterface;
+use HyperfExt\Cookie\Contract\CookieJarInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+
+class QueuedCookieMiddleware implements MiddlewareInterface
+{
+    /**
+     * @var \HyperfExt\Cookie\Contract\CookieJarInterface
+     */
+    private $cookieJar;
+
+    /**
+     * @var ConfigInterface
+     */
+    private $config;
+
+    public function __construct(CookieJarInterface $cookieJar, ConfigInterface $config)
+    {
+        $this->cookieJar = $cookieJar;
+        $this->config = $config;
+    }
+
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        $uri = $request->getUri();
+        $secure = strtolower($uri->getScheme()) === 'https';
+        [$path, $domain, , $sameSite] = $this->cookieJar->getPathAndDomain();
+        $this->cookieJar->setDefaultPathAndDomain($path, $domain, $secure, $sameSite);
+
+        $response = $handler->handle($request);
+
+        foreach ($this->cookieJar->getQueuedCookies() as $cookie) {
+            $response = $response->withCookie($cookie);
+        }
+
+        return $response;
+    }
+}
