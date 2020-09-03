@@ -58,7 +58,7 @@ class CookieJarProxy extends CookieJar
         return $this->getCookieJar()->getQueuedCookies();
     }
 
-    protected function getPathAndDomain(?string $path = null, ?string $domain = null, ?bool $secure = null, ?string $sameSite = null)
+    public function getPathAndDomain(?string $path = null, ?string $domain = null, ?bool $secure = null, ?string $sameSite = null)
     {
         return $this->getCookieJar()->getPathAndDomain($path, $domain, $secure, $sameSite);
     }

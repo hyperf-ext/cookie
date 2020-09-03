@@ -170,7 +170,7 @@ class CookieJar implements CookieJarInterface
      *
      * @return array
      */
-    protected function getPathAndDomain(?string $path = null, ?string $domain = null, ?bool $secure = null, ?string $sameSite = null)
+    public function getPathAndDomain(?string $path = null, ?string $domain = null, ?bool $secure = null, ?string $sameSite = null)
     {
         return [$path ?: $this->path, $domain ?: $this->domain, is_bool($secure) ? $secure : $this->secure, $sameSite ?: $this->sameSite];
     }

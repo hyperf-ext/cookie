@@ -25,7 +25,7 @@ php bin/hyperf.php vendor:publish hyperf-ext/cookie
 如需对 Cookie 加密，额外添加全局中间件 `HyperfExt\Cookie\Middleware\EncryptCookieMiddleware`。
 
 > 注意，使用 Cookie 加密中间件需要依赖 [`hyperf-ext/encryption`](https://github.com/hyperf-ext/encryption) 组件。
-> 并且需求将该中间件放置在首位，以保证将请求中的加密 Cookie 解密。
+> 并且需求将该中间件放置在其他需要处理 Cookie 的中间件之前，以保证将请求中的加密 Cookie 解密。
 
 ## 使用
 
