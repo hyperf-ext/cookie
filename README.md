@@ -16,7 +16,7 @@ composer require hyperf-ext/cookie
 php bin/hyperf.php vendor:publish hyperf-ext/cookie
 ```
 
-> 配置文件位于 `config/autoload/ext-cookie.php`。
+> 配置文件位于 `config/autoload/cookie.php`。
 
 ## 设置
 

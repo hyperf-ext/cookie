@@ -1,12 +1,11 @@
 <?php
 
 $header = <<<'EOF'
-This file is part of Hyperf.
+This file is part of hyperf-ext/cookie.
 
-@link     https://www.hyperf.io
-@document https://hyperf.wiki
-@contact  group@hyperf.io
-@license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+@link     https://github.com/hyperf-ext/cookie
+@contact  eric@zhu.email
+@license  https://github.com/hyperf-ext/cookie/blob/master/LICENSE
 EOF;
 
 return PhpCsFixer\Config::create()

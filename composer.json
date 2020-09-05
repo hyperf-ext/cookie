@@ -7,7 +7,7 @@
         "hyperf",
         "cookie"
     ],
-    "description": "The unofficial Hyperf Queued Cookie package.",
+    "description": "The Hyperf Queued Cookie package.",
     "authors": [
         {
             "name": "Eric Zhu",
