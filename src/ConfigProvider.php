@@ -23,7 +23,7 @@ class ConfigProvider
             'publish' => [
                 [
                     'id' => 'config',
-                    'description' => 'The config for HyperfExt\Cookie.',
+                    'description' => 'The config for hyperf-ext/cookie.',
                     'source' => __DIR__ . '/../publish/cookie.php',
                     'destination' => BASE_PATH . '/config/autoload/cookie.php',
                 ],
