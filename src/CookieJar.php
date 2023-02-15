@@ -13,7 +13,7 @@ namespace HyperfExt\Cookie;
 use Hyperf\HttpMessage\Cookie\Cookie;
 use Hyperf\Utils\Arr;
 use Hyperf\Utils\InteractsWithTime;
-use Hyperf\Utils\Traits\Macroable;
+use Hyperf\Macroable\Macroable;
 use HyperfExt\Cookie\Contract\CookieJarInterface;
 
 class CookieJar implements CookieJarInterface

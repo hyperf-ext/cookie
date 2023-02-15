@@ -12,7 +12,7 @@ namespace HyperfExt\Cookie;
 
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\HttpMessage\Cookie\Cookie;
-use Hyperf\Utils\Context;
+use Hyperf\Context\Context;
 use HyperfExt\Cookie\Contract\CookieJarInterface;
 
 class CookieJarProxy extends CookieJar
