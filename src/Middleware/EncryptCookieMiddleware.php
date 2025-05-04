@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace HyperfExt\Cookie\Middleware;
 
 use Hyperf\HttpMessage\Cookie\Cookie;
-use Hyperf\Utils\Arr;
+use Hyperf\Collection\Arr;
 use HyperfExt\Cookie\CookieValuePrefix;
 use HyperfExt\Encryption\Contract\EncryptionInterface;
 use HyperfExt\Encryption\Contract\SymmetricDriverInterface;
