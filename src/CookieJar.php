@@ -11,9 +11,9 @@ declare(strict_types=1);
 namespace HyperfExt\Cookie;
 
 use Hyperf\HttpMessage\Cookie\Cookie;
-use Hyperf\Utils\Arr;
-use Hyperf\Utils\InteractsWithTime;
-use Hyperf\Utils\Traits\Macroable;
+use Hyperf\Collection\Arr;
+use Hyperf\Support\Traits\InteractsWithTime;
+use Hyperf\Macroable\Macroable;
 use HyperfExt\Cookie\Contract\CookieJarInterface;
 
 class CookieJar implements CookieJarInterface
